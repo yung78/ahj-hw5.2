@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./crm/img/icon.ico" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="./crm/css/style.css"> -->
+    <title>CRM</title>
+  </head>
+  <body>
+    <main class="content">
+      <div class="crm">
+        <div class="title">Товары</div>
+        <div class="add"></div>
+        <div class="products">
+          <table class="table">
+            <tr class="titles">
+              <th>Название</th>
+              <th>Стоимость</th>
+              <th>Действия</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="modal">
+        <form class="form">
+          <label class="label" for="product_input">Название</label>
+          <input type="text" name="name" class="input name_input" required>
+          <label class="label" for="price_input">Стоимость</label>
+          <input type="text" name="price" class="input price_input" required pattern="^[1-9][0-9]*">
+          <div class="buttons">
+            <button type="submit" class="button save_btn">Сохранить</button>
+            <button type="button" class="button cancel_btn">Отмена</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <!-- <script src="./crm/js/Modal.js"></script> -->
+  </body>
+</html>
