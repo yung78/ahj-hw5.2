@@ -1,7 +1,7 @@
 import { fork } from 'child_process';
 import puppeteer from 'puppeteer';
 
-jest.setTimeout(70000);
+jest.setTimeout(90000);
 
 describe('Test validation form', () => {
   let browser;
@@ -9,17 +9,17 @@ describe('Test validation form', () => {
   let server;
 
   beforeAll(async () => {
-    // server = fork('./e2e.server.js');
-    // await new Promise((resolve, reject) => {
-    //   server.on('error', reject);
-    //   server.on('message', (message) => {
-    //     if (message === 'ok') {
-    //       resolve();
-    //     } else {
-    //       reject();
-    //     }
-    //   });
-    // });
+    server = fork('./e2e.server.js');
+    await new Promise((resolve, reject) => {
+      server.on('error', reject);
+      server.on('message', (message) => {
+        if (message === 'ok') {
+          resolve();
+        } else {
+          reject();
+        }
+      });
+    });
 
     browser = await puppeteer.launch({
       headless: false,
@@ -98,6 +98,6 @@ describe('Test validation form', () => {
 
   afterAll(async () => {
     await browser.close();
-    // await server.kill();
+    await server.kill();
   });
 });
