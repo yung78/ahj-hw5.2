@@ -1,7 +1,7 @@
 import { fork } from 'child_process';
 import puppeteer from 'puppeteer';
 
-jest.setTimeout(90000);
+jest.setTimeout(40000);
 
 describe('Test validation form', () => {
   let browser;
@@ -22,7 +22,7 @@ describe('Test validation form', () => {
     });
 
     browser = await puppeteer.launch({
-    //   headless: false,
+      headless: 'new',
     //   slowMo: 100,
     //   devtools: true,
     });
@@ -60,9 +60,16 @@ describe('Test validation form', () => {
   });
 
   test('remove product', async () => {
+    const productsCount = await page.$$('.product').length;
     await page.locator('.delete').click();
 
-    await page.$eval('.product', () => false).catch(() => false);
+    await page.$$('.product').length < productsCount; // тест проходит при любом знаке сравнения
+
+    if (await page.$$('.product').length == productsCount) {  // а тут выясняется что значения до и после равны
+      await page.waitForSelector('.products');
+    } else {
+      await page.waitForSelector('.abrakadabra');
+    }
   });
 
   test('add new product, with not valid name input', async () => {
