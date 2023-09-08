@@ -63,9 +63,9 @@ describe('Test validation form', () => {
     const productsCount = await page.$$('.product').length;
     await page.locator('.delete').click();
 
-    await page.$$('.product').length < productsCount; // тест проходит при любом знаке сравнения
+    // await page.$$('.product').length < productsCount; // тест проходит при любом знаке сравнения
 
-    if (await page.$$('.product').length == productsCount) {  // а тут выясняется что значения до и после равны
+    if (await page.$$('.product').length === productsCount) { // а тут выясняется что значения до и после равны
       await page.waitForSelector('.products');
     } else {
       await page.waitForSelector('.abrakadabra');
